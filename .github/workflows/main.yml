@@ -1,0 +1,32 @@
+name: GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Change to your branch name
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9.12  # Choose the appropriate Python version
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Build and deploy
+      run: |
+        python htmlapp.py build
+        mv build/* ./
+        echo "Your website is ready!" > index.html
+        touch .nojekyll
+        git add .
+        git commit -m "Build and deploy"
+        git push origin main  # Change to your branch name
