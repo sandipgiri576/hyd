@@ -1,4 +1,4 @@
-name: GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main  # Change to your branch name
 
 jobs:
-  build-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,17 +16,15 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.9.12  # Choose the appropriate Python version
+        python-version: 3.9  # Choose the appropriate Python version
 
     - name: Install dependencies
-      run: pip install -r requirements.txt
+      run: pip install -r ../../hyd-test/requirement.txt
 
-    - name: Build and deploy
-      run: |
-        python htmlapp.py build
-        mv build/* ./
-        echo "Your website is ready!" > index.html
-        touch .nojekyll
-        git add .
-        git commit -m "Build and deploy"
-        git push origin main  # Change to your branch name
+    - name: Start Flask server
+      run: python ../../hyd-test/htmlapp.py &
+
+    - name: Wait for server to start
+      run: sleep 5
+
+
