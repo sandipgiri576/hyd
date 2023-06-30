@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <title>ChemSpace Navigator Home</title>
+</head>
+
+<body style="background-color: slateblue; padding-top: 2.5%;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" style="font-family: verdana; text-align: center; color: white;">
+                <h1 style="padding-top: 1.5%;">
+                    Hydrocarbon Navigator!
+                </h1>
+                <h3>
+                    ---Explore the vast space of hydrocarbons---
+                </h3>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12" style="font-family: verdana; text-align: center; color: white;">
+                <p>
+                    <strong>Retieve the Information using search categories:</strong>
+                </p>
+                <br>
+                <form action='/results' method='POST'>
+                    <p style="font-family: verdana; text-align: center; color: white;">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <label for="fname">
+                                    Please type a smile/molecule name/chemical formula of a "Hydrocarbon" below and select the information you are interested in retrieving:
+                                </label>
+                            </div>
+                            <div class="col-md-3">
+                                <input placeholder="type here" name="drug_name" type="text" onclick="disable_()" style="width: 100%; height: 100%;">
+                            </div>
+                        </div>
+                    </p>
+                    <script>
+                        function stoichiometry()
+                        {
+                            document.getElementById("ElementC").disabled=false
+                            document.getElementById("ElementH").disabled=false
+                            document.getElementById("ElementO").disabled=false
+                            document.getElementById("ElementF").disabled=false
+                            document.getElementById("ElementN").disabled=false
+                            document.getElementById("Mol_name").disabled=true
+                            document.getElementById("smiles").disabled=true
+                            document.getElementById("mol_formula").disabled=true
+                        }
+                    </script>
+                    <script>
+                        function disable_()
+                        {
+                            document.getElementById("stoichiometry_").disabled=true
+                            document.getElementById("Mol_name").disabled=false
+                            document.getElementById("smiles").disabled=false
+                            document.getElementById("mol_formula").disabled=false
+                        }
+                    </script>
+                    <script>
+                        function enable_s()
+                        {
+                            document.getElementById("stoichiometry_").disabled=false
+                            document.getElementById("Mol_name").disabled=false
+                            document.getElementById("smiles").disabled=false
+                            document.getElementById("mol_formula").disabled=false
+                            document.getElementById("ElementC").disabled=true
+                            document.getElementById("ElementH").disabled=true
+                            document.getElementById("ElementO").disabled=true
+                            document.getElementById("ElementF").disabled=true
+                            document.getElementById("ElementN").disabled=true
+                        }
+                    </script>
+                    <br>
+                    <p> Information of interest: <br></p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p>
+                                <input type='radio' id="Mol_name" name='choice' value='choice1'> Chemical Properties with Molecular Name
+                            </p></div>
+                        <div class="col-md-4">
+                            <p>
+                                <input type='radio' id="smiles" name='choice' value='choice2'> Chemical Properties with SMILES
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <p>
+                                <input type='radio' id="mol_formula" name='choice' value='choice3'> Chemical Properties with Molecular Formula
+                            </p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <p><input type='radio' id="stoichiometry_" name='choice' value='choice4' onclick="stoichiometry()"> Chemical Properties with Stoichiometry: (Using Filter  Get humo, lumo, a, b, c, u, g, etc.  properties )</p>
+                        <br>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-2">
+                            <label for="ElementC">&nbsp;&nbsp;C </label>
+                            <input type="number" name="ElementC" id="ElementC" min="0" max="15" step="1" value="0" disabled>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="ElementH">&nbsp;&nbsp;H </label>
+                            <input type="number" id="ElementH" name="ElementH" min="0" max="15" step="1" value="0" disabled>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="ElementO">&nbsp;&nbsp;O </label>
+                            <input type="number" id="ElementO" name="ElementO" min="0" max="15" step="1" value="0" disabled>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="ElementF">&nbsp;&nbsp;F </label>
+                            <input type="number" id="ElementF" name="ElementF" min="0" max="15" step="1" value="0" disabled>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="ElementN">&nbsp;&nbsp;N </label>
+                            <input type="number" id="ElementN" name="ElementN" min="0" max="15" step="1" value="0" disabled>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <br>
+                    <strong>Note1: Please select the 4th checkbox to access the Stoichiometry values!(Be patience)</strong><br>
+                    <strong>Note2: Reset to enable all the inputs!</strong>
+                    </p>
+                    <input type='submit' value='Get Information'>
+                    <input type="Reset" onclick="enable_s()">
+                </form>
+            </div>
+        </div>     
+    </div>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+    
+</body>
+
+</html>
