@@ -3,3 +3,5 @@ flask-restful
 flask-sqlalchemy
 requests
 rdkit-pypi
+pandas
+numpy
