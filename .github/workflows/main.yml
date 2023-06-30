@@ -17,6 +17,9 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.9  # Choose the appropriate Python version
+     
+    - name: see the file structure
+      run: ls
 
     - name: Install dependencies
       run: pip install -r ../../hyd-test/requirement.txt
