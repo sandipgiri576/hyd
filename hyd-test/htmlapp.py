@@ -69,5 +69,6 @@ def results() :
     
 # render template is used to return a html page or fetch a html page whether it is dynamic or not dynamic
 if __name__ == '__main__':
-    app.run(host='10.3.100.126')
+    app.run(debug=False,host='0.0.0.0')
     
+
