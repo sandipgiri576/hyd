@@ -42,7 +42,7 @@ class Molecules():
         if (file_):
             file = open('./webserver/HYD_database/chemdatafile.csv')
         else:
-            file = open('./chemdatafile.csv')
+            file = open('chemdatafile.csv')
         # Now, Read the contents from the file using csv reader
         contents = csv.reader(file)
         contents2 = next(contents)
