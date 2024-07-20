@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMILES Search Results</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="static/jsmol/JSmol.min.js"></script>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+        .container {
+            display: flex;
+        }
+        .table-container {
+            flex: 1;
+            padding: 10px;
+        }
+        .jmol-container {
+            flex: 1;
+            text-align: right;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="table-container">
+            <h1>Chemical properties of 😃</h1>
+            <table id="molecule-table">
+                <tbody></tbody>
+            </table>
+            <!-- <a href="index.html">Back to Search</a> -->
+            <a href="#" onclick="goBack()">Back</a>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+        </div>
+        <div class="jmol-container">
+            <script type="text/javascript">
+                var Info = {
+                    width: 500,
+                    height: 500,
+                    serverURL: "static/jsmol/php/jsmol.php",
+                    use: "HTML5",
+                    j2sPath: "static/jsmol/j2s",
+                    console: "jmolApplet0_infodiv"
+                };
+                var jmolApplet0 = Jmol.getApplet("jmolApplet0", Info);
+            </script>
+            <div id="jmolApplet0_infodiv"></div>
+        </div>
+    </div>
+    <script src="chemdata.js"></script>
+</body>
+</html>

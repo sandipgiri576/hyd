@@ -1,0 +1,57 @@
+body {
+    background-color: #f0f0f5; /* Softer background for improved contrast */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: white; /* White background for clarity */
+    padding: 30px;  /* Increased padding */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    max-width: 900px; /* Limit width for readability on large screens */
+    margin: 30px auto; /* Center the container */
+}
+
+h1 {
+    color: #2d7577; /* Darker, muted blue-green for scientific feel */
+    margin-bottom: 20px;
+    text-align: center; /* Center the main title */
+}
+
+h3 {
+    color: #333;  /* Dark gray for section headings */
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc; /* Lighter border for less visual prominence */
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.radio-label {
+    margin-right: 15px;
+    font-weight: normal;
+    color: #444; /* Slightly darker label text for easier reading */
+}
+
+.btn {
+    background-color: #2d7577; /* Use the heading color for buttons */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #255c5e; /* Slightly darker on hover */
+}
+
+iframe {
+    width: 100%;
+    min-height: 500px;
+    border: 1px solid #ccc; /* Subtle border for definition */
+}

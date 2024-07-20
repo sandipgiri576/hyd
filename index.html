@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>molecule Database</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        } */
+        #property-search-form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        #property-search-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        #property-search-form select, 
+        #property-search-form input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        #property-search-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #property-search-form button:hover {
+            background-color: #0056b3;
+        }
+        #property-input {
+            display: flex;
+            flex-direction: column;
+        }
+        #property-input label {
+            margin-bottom: 5px;
+        }
+        #property-input div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #property-input input {
+            width: calc(50% - 10px);
+            margin: 5px 0;
+        }
+        .range-popup {
+            position: absolute;
+            background: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+        <h1>Chemical Space</h1>
+        <form id="search-form">
+            <label for="search-input">Please type a SMILES 😃:</label>
+            <input type="text" id="search-input" name="search-input">
+            <button type="submit">Get SMILES</button>
+        </form>
+        <form id="name-search-form">
+            <label>Please type the number of C and H:</label>
+            <div>
+                <label for="c-input">C:</label>
+                <input type="number" id="c-input" name="c-input" min="0" max="20" required>
+            </div>
+            <div>
+                <label for="h-input">H:</label>
+                <input type="number" id="h-input" name="h-input" min="0" max="20" required>
+            </div>
+            <button type="submit">Get MolStochiometry</button>
+        </form>
+        <!-- <form id="dipole-search-form">
+            <label for="min-dipole-input">Minimum Dipolemoment:</label>
+            <input type="number" id="min-dipole-input" name="min-dipole-input" min="0" step="any"  required>
+            <label for="max-dipole-input">Maximum Dipolemoment:</label>
+            <input type="number" id="max-dipole-input" name="max-dipole-input" min="0" step="any"  required>
+            <button type="submit">Search by Dipolemoment</button>
+        </form> -->
+                <!-- <form id="property-search-form">
+                    <label for="search-type">Search by Property:</label>
+                    <select id="search-type" name="search-type">
+                        <option value="Dipolemoment">Dipolemoment (Debye)</option>
+                        <option value="HOMO">HOMO (eV)</option>
+                        <option value="LUMO">LUMO (eV)</option>
+                        <option value="EnergyGap">EnergyGap (eV)</option>
+                        <option value="RotationalconstantA">A (cm-1)</option>
+                        <option value="RotationalconstantB">B (cm-1)</option>
+                        <option value="RotationalconstantC">C (cm-1)</option> -->
+                       
+                    <!-- </select>
+                    <div id="property-input">
+                        <label for="min-value">Minimum Value:</label>
+                        <input type="number" id="min-value" name="min-value" step="any" required>
+                        <label for="max-value">Maximum Value:</label>
+                        <input type="number" id="max-value" name="max-value" step="any" required>
+                    </div>
+                    <button type="submit">Search</button>
+                </form>  -->
+                <form id="property-search-form">
+                    <label for="search-type">Search by Property:</label>
+                    <select id="search-type" name="search-type">
+                        <option value="Dipolemoment">Dipolemoment (Debye)</option>
+                        <option value="HOMO">HOMO (eV)</option>
+                        <option value="LUMO">LUMO (eV)</option>
+                        <option value="EnergyGap">HOMO-LUMO gap (eV)</option>
+                        <option value="RotationalconstantA">Rotational constant A (cm-1)</option>
+                        <option value="RotationalconstantB">Rotational constant B (cm-1)</option>
+                        <option value="RotationalconstantC">Rotational constant C (cm-1)</option>
+                    </select>
+                    <div id="property-input">
+                        <div>
+                            <label for="min-value">Minimum Value:</label>
+                            <input type="number" id="min-value" name="min-value" step="any" required>
+                        </div>
+                        <div>
+                            <label for="max-value">Maximum Value:</label>
+                            <input type="number" id="max-value" name="max-value" step="any" required>
+                        </div>
+                    </div>
+                    <button type="submit">Search</button>
+                </form>
+                <div id="range-popup" class="range-popup"></div>
+            
+                <script>
+                    const rangeData = {
+                        Dipolemoment: { min: 1e-05, max: 14.26263, placeholderMin: 0.4, placeholderMax: 0.8 },
+                        HOMO: { min: -10.520, max: -3.458, placeholderMin: -6, placeholderMax: -2 },
+                        LUMO: { min: -5.018, max: 2.479, placeholderMin: -3, placeholderMax: 2 },
+                        EnergyGap: { min: 0.977, max: 12.527, placeholderMin: 0, placeholderMax: 5 },
+                        RotationalconstantA: { min: 0.0, max: 8566335.323, placeholderMin: 0, placeholderMax: 20 },
+                        RotationalconstantB: { min: 0.009, max: 14.055, placeholderMin: 0, placeholderMax: 10 },
+                        RotationalconstantC: { min: 0.009, max: 14.055, placeholderMin: 0, placeholderMax: 10 }
+                    };
+            
+                    const searchType = document.getElementById('search-type');
+                    const minValue = document.getElementById('min-value');
+                    const maxValue = document.getElementById('max-value');
+                    const rangePopup = document.getElementById('range-popup');
+            
+                    function updateRange() {
+                        const selectedOption = searchType.value;
+                        const { min, max, placeholderMin, placeholderMax } = rangeData[selectedOption];
+            
+                        minValue.placeholder = `Min: ${placeholderMin}`;
+                        maxValue.placeholder = `Max: ${placeholderMax}`;
+            
+                        minValue.addEventListener('focus', () => showPopup(min, max));
+                        maxValue.addEventListener('focus', () => showPopup(min, max));
+                    }
+            
+                    function showPopup(min, max) {
+                        rangePopup.innerText = `Valid range: ${min} to ${max}`;
+                        rangePopup.style.display = 'block';
+                    }
+            
+                    function hidePopup() {
+                        rangePopup.style.display = 'none';
+                    }
+            
+                    searchType.addEventListener('change', updateRange);
+                    minValue.addEventListener('blur', hidePopup);
+                    maxValue.addEventListener('blur', hidePopup);
+            
+                    document.addEventListener('DOMContentLoaded', updateRange);
+                </script>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <iframe src="https://pubchem.ncbi.nlm.nih.gov/edit3/index.html" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
