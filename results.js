@@ -32,7 +32,7 @@ $(document).ready(function() {
                 row.append($('<td>').text(molecule.TotalEnthalpy));
                 row.append($('<td>').text(molecule.Totalentropy));
                 row.append($('<td>').text(molecule.Gibbsfreeenergy));
-                // Append other properties as needed
+                
 
                 tableBody.append(row);
             });
